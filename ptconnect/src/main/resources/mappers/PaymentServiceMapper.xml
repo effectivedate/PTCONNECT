@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.PaymentServiceMapper">
+	
+	<insert id="payment" parameterType="po">
+		insert into payment(pmNo, odNo, portOneNo, pmPrice, pmMethod, pmCard, pgCorp, odDate, pmState)
+	 	values(#{pmNo}, #{odNo}, #{portOneNo}, #{pmPrice}, #{pmMethod}, #{pmCard}, #{pgCorp}, now(), #{pmState})
+	</insert>
+	
+	<insert id="orderInsert"  parameterType="po">
+		insert into order_(odNo, mbNo, odPoint, odCoupon, odPrice)
+		values(#{odNo}, #{mbNo}, #{usePoint}, #{odCoupon}, #{odPrice})
+	</insert>
+	
+	<update id="paymentStateUpdate" parameterType="po">
+		update payment set pmState = 'cancle'
+		where odNo = #{odNo}
+	</update>
+	
+	
+	<insert id="nonUserOrderInsert"  parameterType="po">
+		insert into order_(odNo, nmNo, odPoint, odCoupon, odPrice)
+		values(#{odNo}, #{nmNo}, #{usePoint}, #{odCoupon}, #{odPrice})
+	</insert>
+	
+	<insert id="orderProductInsert"  parameterType="po">
+		insert into orderproduct(odNo, tnNo, opIntro)
+		values(#{odNo}, #{tnNo}, #{opIntro})
+	</insert>
+	
+	<insert id="paymentCancleInsert"  parameterType="po">
+		insert into paymentCancle(pcNo, odNo, pcPrice, pcContent, pcDate, pcState)
+		values(#{pmNo}, #{odNo}, #{pcPrice}, #{pcContent}, now(), 'cancle')
+	</insert>
+	
+	<insert id="pointInsert" parameterType="po">
+	    insert into point_(mbNo, ptPoint, ptBalance, ptContent)
+	    values(#{mbNo}, #{ptPoint}, #{ptPoint}, #{ptContent})
+	</insert>
+	
+	<insert id="usePoint"  parameterType="po">
+		<selectKey keyProperty="upNo" resultType="int" order="AFTER">
+	        select max(upNo) as upNo from usepoint where mbNo=#{mbNo}
+	    </selectKey>
+		insert into usepoint(mbNo, usePoint, useContent)
+		values(#{mbNo}, #{usePoint}, #{useContent})
+	</insert>
+	
+	<insert id="usePointDetail"  parameterType="po">
+<!-- 		<selectKey keyProperty="ptNo" resultType="int" order="BEFORE"> -->
+<!-- 	        select max(ptNo) as ptNo from point_ where mbNo=#{mbNo} -->
+<!-- 	    </selectKey> -->
+		insert into usePointDetail(upNo, ptNo, usePointDetail)
+		values(#{upNo}, #{ptNo}, #{usePointDetail})
+	</insert>
+	
+	<insert id="nonmember" parameterType="po">
+		<selectKey keyProperty="nmNo" resultType="int" order="AFTER">
+	        select max(nmNo) as nmNo from nonmember
+	    </selectKey>
+	    insert into nonmember(nmName, nmPhone, nmPwd)
+	    values(#{nmName}, #{nmPhone}, #{nmPwd})
+	</insert>
+	
+	<select id="sumPoint" parameterType="int" resultType="int">
+	    SELECT IFNULL(SUM(ptBalance), 0) FROM point_ 
+	    WHERE mbNo = #{mbNo}
+	</select>
+	
+	<select id="selectPointBalance" parameterType="int" resultType="po">
+	    SELECT IFNULL(ptBalance, 0) AS ptBalance, ptNo
+	    FROM point_
+	    WHERE mbNo = #{mbNo} 
+	      AND ptBalance > 0 
+	    ORDER BY ptNo ASC 
+	    LIMIT 1
+	</select>
+	
+	<update id="updatePointBalance" parameterType="po">
+		UPDATE point_
+		SET ptBalance = 
+	    <choose>
+			<when test="remainUsePoint >= ptBalance">
+				0
+			</when>
+			<otherwise>
+				ptBalance - #{remainUsePoint}
+			</otherwise>
+		</choose>,
+		ptDateM = now()
+		WHERE mbNo = #{mbNo}
+		AND ptBalance > 0
+	    AND #{remainUsePoint} > 0 
+		ORDER BY ptNo ASC limit 1
+	</update>
+	
+	<select id="selectUsePoint" parameterType="po" resultType="po">
+		SELECT * FROM order_
+		WHERE mbNo=#{mbNo} and odNo=#{odNo}
+		limit 1
+	</select>
+	
+</mapper>

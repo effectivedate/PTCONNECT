@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+.user_info{
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    margin-left: 33.333333%;
+}
+
+.user_info hr{
+    border-top: 1px solid rgb(228, 234, 240);
+    margin: 24px 0px;
+}
+
+.user_wrap{
+    margin-top: 24px;
+}
+
+.user_input{
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(61, 69, 77);
+    margin-bottom: 24px;
+}
+
+.user_input:last-child{
+    margin-bottom: 0px;
+}
+
+.user_input label{
+	margin-bottom: 8px;
+}
+
+.user_input label span{
+	color: #5865F2;
+}
+
+.user_input input:disabled{
+	background-color:#e4eaf0;
+} 
+
+.center_search{
+	position:relative;
+}
+
+.user_input .search_btn{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+}
+
+.user_input .search_btn i{
+	font-size : 25px;
+}
+
+.user_input .flex{
+    display: flex;
+    margin: 0px -4px !important;
+}
+
+.user_input .button_wrap{
+	width: 50%;
+	margin: 0px 4px;
+}
+
+.user_input .button_wrap button{
+    width: 100%;
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    border: 1px solid rgb(218, 224, 230);
+    border-radius: 6px;
+    padding: 14px 24px;
+    background-color: rgb(255, 255, 255);
+    cursor:pointer;
+}
+
+.user_input .button_wrap button.active{
+    border: 1px solid #5865F2;
+    color: #5865F2;
+    background-color: #9da4f5;
+}
+
+.user_input .input_wrap{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(228, 234, 240);
+    border-radius: 6px;
+    color: rgb(61, 69, 77);
+    background-color: rgb(255, 255, 255);
+}
+
+.user_input .input_wrap .input_width{
+    width: calc(100% - 120px);
+}
+
+.user_input .input_wrap input{
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.user_input .send_auth_button{
+    cursor: pointer;
+    min-width: 110px;
+    display: inline-block;
+    width: 120px;
+    padding: 0px 8px;
+    line-height: 36px;
+    height: 36px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    margin-right: 8px;
+    color: rgb(255, 255, 255);
+    background-color: #5865F2;
+}
+
+.user_input textarea{
+    width: 90%;
+    height: 128px;
+    resize: none;
+    margin: 0 auto;
+}
+
+.submit{
+	display:flex;
+}
+
+.half_button{
+	width:50%;
+	margin: 0 4px;
+}
+
+.submit_button{
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: bold;
+    border: none;
+    transition-duration: 0s;
+    cursor:pointer;
+}
+
+.submit_button.unchecked{
+    height: 48px;
+    width: 100%;
+    background-color: rgb(237, 241, 245);
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: rgb(152, 165, 179);
+    border: 1px solid rgb(237, 241, 245);
+    margin: 0px;
+}
+
+.submit_button.checked{
+    height: 48px;
+    width: 100%;
+    background-color: #5865F2;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    border: 1px solid #5865F2;
+    margin: 0px;
+}
+
+.resign{
+    font-size: 14px;
+    text-decoration: underline;
+    text-align: center;
+    color: rgb(108, 118, 128);
+    cursor: pointer;
+    margin: 24px 0px;
+}
+
+.trainerInfoNotice {
+	argin-bottom: 20px;
+    padding: 5px 15px;
+    border-radius: 6px;
+    background: #e4eaf0;
+    font-size: 13px;
+	margin-bottom: 15px;
+}
+
+.trainerInfoNotice li{
+    list-style: disc;
+}
+
+.trainer_status_inline {
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+}
+
+.trainer_status {
+	background-color: #5865F2;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    border: 1px solid #5865F2;
+    margin: 10px 0;
+	text-align: center;
+    width: 60%;
+}
+
+.status_icon {
+	text-align: center;
+	margin: -7px 0;
+    color: #5865f2;
+}
+
+.submit {
+	display: flex;
+	justify-content: center;
+}

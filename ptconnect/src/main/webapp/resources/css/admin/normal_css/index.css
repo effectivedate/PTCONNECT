@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+/* 공통 CSS */
+.color-discord{
+	color: #5865F2;
+}
+.color-cancel{
+	color: #e74a3b;
+}
+.btn-discord{
+	color: #fff;
+	background-color: #5865F2;
+	border-color: #5865F2;
+}
+.btn-discord:hover{
+	color: #fff;
+	background-color: #3c49f0;
+	border-color: #3c49f0;
+}
+.btn-cancel{
+	color: #fff;
+	background-color: #e74a3b;
+	border-color: #e74a3b;
+}
+.btn-cancel:hover{
+	color: #fff;
+	background-color: #cd2618;
+	border-color: #cd2618;
+}
+.btn-scale-125{
+	transform:scale(1.25);
+}
+.btn-scale-125:not(:first-of-type){
+	margin-left: 5%;
+}
+.jc-between{
+	justify-content: space-between;
+}
+.bl-radi-0{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.br-radi-0{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+/* 공통 CSS */
+
+/* 상단 필터, 검색 */
+.div-filter{
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	padding: 0;
+	margin: 0;
+}
+.div-status{
+	padding: 0;
+}
+.div-button{
+	width: 100%;
+	height: 100%;
+	padding-left: 5%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.ul-status{
+	margin: 0;
+	padding: 0;
+	width: 70%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.li-status{
+	list-style: none;
+}
+.status-item, .status-item:hover, .status-item:visited{
+	color: #858796;
+	font-size: 0.85rem;
+	text-decoration: none;
+}
+.status-item:hover{
+	text-decoration: none;
+}
+.span-count{
+	font-weight: 900;
+}
+.status-item:hover .span-count{
+	color: #4e73df;
+	transition: all .3s;
+}
+.div-search{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0;
+}
+.div-label{
+	margin-right: 2%;
+	display: flex;
+	align-items: center;
+	width: 70%;
+	height: 100%;
+}
+.label-search{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 0;	
+	
+}
+.input-search{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #d1d3e2;
+	border-left: 0;
+	border-radius: 0.2rem;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;	
+	font-size: 0.85rem;
+	padding: 0.25rem 0.5rem;
+}
+.input-search:focus{
+	outline: none;
+	border: 1px solid #5865F2;
+	border-left: 0;
+}
+/* 상단 필터, 검색 */
+
+
+/* 테이블 영역 */
+.tb1{
+	text-align: center;
+	border: 1px solid #e3e6f0;
+	border-left-width: 0;
+	border-right-width: 0;
+	vertical-align: middle;
+}
+/* .tb1 tr:not(:first-of-type){
+	cursor: pointer;
+}  */
+.tb1 td, .tb1 th{
+	vertical-align: middle;
+	padding: 1rem !important;
+}
+.tb1 .td1{
+	padding: 1rem !important;
+}
+/* 테이블 영역 */
+
+
+/* 페이징 영역 */
+.pagination-area{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+}
+.page-table td {
+	padding: 20px;
+}
+.page-num {
+	color: black;
+	font-size: 16px;
+	text-decoration: none;
+}
+.page-num:visited{
+	color: black;
+	text-decoration: none;
+}
+.currentPageNum{
+	transform: scale(1.25);
+	font-weight: bold;
+	text-decoration: underline;
+}
+/* 페이징 영역 */
+
+
+
+
+

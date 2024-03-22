@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration> 
+	<typeAliases>
+		 <typeAlias alias="mo" type="com.ptconnect.myapp.domain.MemberDTO"/>
+		 <typeAlias alias="nmo" type="com.ptconnect.myapp.domain.NonMemberDTO"/>
+		 <typeAlias alias="ao" type="com.ptconnect.myapp.domain.AdminDTO"/>
+		 <typeAlias alias="cio" type="com.ptconnect.myapp.domain.CenterInfoDTO"/>
+		 <typeAlias alias="tio" type="com.ptconnect.myapp.domain.TrainerInfoDTO"/>
+		 <typeAlias alias="scri" type="com.ptconnect.myapp.domain.SearchCriteria"/>
+		 <typeAlias alias="pm" type="com.ptconnect.myapp.domain.PageMaker"/>
+		 <typeAlias alias="fdo" type="com.ptconnect.myapp.domain.FileDetailDTO"/>
+		 <typeAlias alias="rvo" type="com.ptconnect.myapp.domain.ReviewDTO"/>
+		 <typeAlias alias="po" type="com.ptconnect.myapp.domain.PaymentDTO"/>
+		 <typeAlias alias="qo" type="com.ptconnect.myapp.domain.QualifyInfo"/>
+		 <typeAlias alias="pro" type="com.ptconnect.myapp.domain.PriceInfo"/>
+		 <typeAlias alias="pgo" type="com.ptconnect.myapp.domain.ProgramDTO"/>
+		 <typeAlias alias="bdo" type="com.ptconnect.myapp.domain.BoardDTO"/>
+	</typeAliases>
+</configuration>

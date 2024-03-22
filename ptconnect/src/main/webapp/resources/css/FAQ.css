@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+.my-4 {
+	margin-bottom: 0;
+}
+
+.NLYQY {
+    min-height: 60vh;
+}
+.myContainer {
+    width: 100vw;
+    padding: 0 24px;
+}
+.myContainer {
+    max-width: 1136px;
+    margin: auto;
+    font-size: 16px;
+}
+.NLYQY .page-header {
+    padding: 64px 0px 0px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgb(228, 234, 240);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.NLYQY .page-header h2 {
+    color: rgb(41, 46, 51);
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0px;
+}
+.NLYQY .faqComp {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.NLYQY .faqComp .faqList {
+    box-shadow: rgb(228, 234, 240) 0px 1px 0px 0px;
+    cursor: pointer;
+}
+.NLYQY .faqComp .faqList .faqTitle {
+    border-top: 1px solid rgb(228, 234, 240);
+    border-right: 1px solid rgb(228, 234, 240);
+    border-left: 1px solid rgb(228, 234, 240);
+    border-image: initial;
+    border-bottom: none;
+    padding: 24px;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.NLYQY .faqComp .faqList .title {
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+}
+.NLYQY .faqComp .faqList .content {
+    border-top: 1px solid rgb(228, 234, 240);
+    border-right: 1px solid rgb(228, 234, 240);
+    border-left: 1px solid rgb(228, 234, 240);
+    border-image: initial;
+    border-bottom: none;
+    font-size: 16px;
+    padding: 24px 24px 48px;
+    color: rgb(61, 69, 77);
+    background-color: rgb(247, 249, 250);
+}
+.pagination-area {
+	margin-bottom: 50px;
+}

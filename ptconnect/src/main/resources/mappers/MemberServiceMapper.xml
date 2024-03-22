@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.MemberServiceMapper">
+	<insert id="memberInsert" parameterType="mo">
+		INSERT INTO member(mbAuth, mbEmail, mbPwd, mbName, mbPhone, mbAddr, mbMapY, mbMapX)
+		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbName}, #{mbPhone}, #{mbAddr}, #{mbMapY}, #{mbMapX})
+	</insert>
+	<insert id="centerInsert" parameterType="cio">
+		<selectKey keyProperty="mbNo" resultType="int" order="AFTER">
+			SELECT MAX(mbNo) as mbNo FROM member
+		</selectKey>
+		INSERT INTO member(mbAuth, mbEmail, mbPwd, mbName, mbPhone, mbAddr, mbMapY, mbMapX)
+		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbName}, #{mbPhone}, #{mbAddr}, #{mbMapY}, #{mbMapX})
+	</insert>
+	<insert id="centerInfoInsert" parameterType="cio">
+		INSERT INTO centerinfo(mbNo,ctName,ctBn)
+		VALUES(#{mbNo},#{ctName},#{ctBn})
+	</insert>
+	<select id="memberEmailCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail}
+	</select>
+	<select id="memberLogin" parameterType="String" resultType="mo">
+		SELECT * FROM member WHERE mbEmail = #{mbEmail} ORDER BY mbNo desc limit 1
+	</select>
+	<select id="nonMemberLogin" parameterType="String" resultType="nmo">
+		SELECT * FROM nonMember WHERE nmPhone = #{nmPhone} order by nmNo desc limit 1
+	</select>
+	<select id="nonMemberOrderList" parameterType="int" resultType="po">
+		SELECT * 
+		FROM order_ od
+		join orderproduct op on od.odNo = op.odNo 
+		join payment p ON od.odNo = p.odNo
+		left join paymentcancle pc ON od.odNO = pc.odNo
+		join nonmember nm on od.nmNo = nm.nmNo 
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		WHERE od.nmNo = #{nmNo}
+	</select>
+	<select id="memberEmailFind" parameterType="String" resultType="String">
+		SELECT mbEmail FROM member WHERE mbName = #{mbName} AND mbPhone = #{mbPhone} limit 1
+	</select>
+	<select id="memberPwdFind" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE mbEmail = #{mbEmail} AND mbPhone = #{mbPhone} limit 1
+	</select>
+	
+	<select id="memberPwdCheck" parameterType="int" resultType="mo">
+		SELECT * FROM member where mbNo=#{mbNo}
+	</select>
+	<update id="memberPwdUpdate" parameterType="mo">
+		update member set mbPwd = #{mbPwd} where mbNo = #{mbNo};
+	</update>
+</mapper>

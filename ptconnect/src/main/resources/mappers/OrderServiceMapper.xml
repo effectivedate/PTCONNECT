@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.OrderServiceMapper">
+
+	
+	<select id="userProductList" parameterType="scri" resultType="po">
+		select * 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.mbNo = #{mbNo}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+		<![CDATA[ AND o.odDate >= #{startDate} AND o.odDate <= DATE_ADD(#{endDate}, INTERVAL 1 DAY) ]]>
+		</if>
+		order by o.odDate DESC limit #{page},#{perPageNum}
+	</select>
+	<select id="userProductDetail" parameterType="String" resultType="po">
+		select * 
+		from order_ o
+		join payment p ON o.odNo = p.odNo
+		join orderproduct op on o.odNo = op.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.odNo = #{odNo}
+	</select>
+	
+	<select id="trainerSalesList" parameterType="scri" resultType="po">
+		select * 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone as oderMbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where op.tnNo = #{tnNo}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+		<![CDATA[ AND o.odDate >= #{startDate} AND o.odDate <= DATE_ADD(#{endDate}, INTERVAL 1 DAY) ]]>
+		</if>
+		order by o.odDate DESC limit #{page},#{perPageNum}
+	</select>
+	
+	<select id="trainerSalesTotalCount" parameterType="scri" resultType="int">
+		select COUNT(*) 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where op.tnNo = #{tnNo}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+		<![CDATA[ AND o.odDate >= #{startDate} AND o.odDate <= DATE_ADD(#{endDate}, INTERVAL 1 DAY) ]]>
+		</if>
+		order by o.odDate DESC
+	</select>
+	
+	<select id="userOrderTotalCount" parameterType="scri" resultType="int">
+		select COUNT(*) 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.mbNo = #{mbNo}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+		<![CDATA[ AND o.odDate >= #{startDate} AND o.odDate <= DATE_ADD(#{endDate}, INTERVAL 1 DAY) ]]>
+		</if>
+		order by o.odDate DESC
+	</select>
+	
+	<select id="centerTrainerSalesList" parameterType="scri" resultType="po">
+		select *
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone as oderMbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, m2.mbPhone, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where op.tnNo = #{tnNo}
+		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+		<![CDATA[ AND o.odDate >= #{startDate} AND o.odDate <= DATE_ADD(#{endDate}, INTERVAL 1 DAY) ]]>
+		</if>
+		order by o.odDate DESC
+	</select>
+	
+</mapper>

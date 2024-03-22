@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.loginWrap{
+	display:grid;
+	padding:100px;
+	margin:0 auto;
+}
+
+.loginBox{
+	width:500px;
+	height:500px;
+	display:grid;
+	background-color:#dff2fd;
+	border-radius:30px;
+	margin:0 auto;
+	box-shadow: 1px 1px 9px 0px #0f294138;
+}
+
+.tabWrap{
+	display:flex;
+	height:30px;
+	align-items:center;
+	justify-content: space-between;
+	margin:0 auto;
+	margin-top:30px;
+	cursor:pointer;
+	color:#a09fc2;
+	gap:20px;
+}
+
+.tabWrap tab{
+	border-radius:15px;
+}
+
+.loginSection{
+	display:grid;
+	border-radius:30px;
+	margin-top:40px;
+	
+}
+
+.emailBox{
+	width:90%;
+	margin:0 auto 20px;
+}
+.pwdBox{
+	width:90%;
+	margin:0 auto;
+}
+
+.loginBtn{
+	width:90%;
+	margin:50px auto 0;
+}
+
+.loginBtn button{
+	border:none;
+	border-radius:10px;
+	background-color: #5865F2;
+	color:white;
+	width:100%;
+	height:40px;
+	font-size:20px;
+	font-weight:bold;
+	margin-bottom:30px;
+	}
+	
+.menuBox{
+	display:flex;
+	color:#9e9e9e;
+	align-items:center;
+	justify-content: center;
+	gap:30px;
+	cursor:pointer;
+}
+	
+	
+.tab.selectedTab {
+	color: #5865F2; /* 선택된 탭의 텍스트 색상 */
+	font-size:20px;
+	font-weight:bold;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+
+/* 테이블 영역 */
+.tb1 tr:not(:first-of-type){
+	cursor: pointer;
+} 
+.td1-gray{
+	background-color: #f8f9fc;
+}
+/* 테이블 영역 */
+
+
+/* 모달 영역 */
+.modal-footer-modify{
+	width: 100%;
+	justify-content: space-between;
+}
+.modal-footer-div1{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+.select-penalty{
+	width: 200px;
+	padding: .8rem .5rem; /* 여백으로 높이 설정 */
+	font-family: inherit;  /* 폰트 상속 */
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+	border: 2px solid #5a5c69; 
+	border-radius: .5rem;
+	-webkit-appearance: none;  /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+.select-penalty::-ms-expand { 
+	display: none;
+}
+.select-penalty:focus{
+	outline: none;
+}
+.option-penalty{
+	
+}
+.modal-text{
+	padding: 0.5rem;
+	width: 100%;
+	min-height: 300px;
+	background-color: #fff;
+	resize: none;
+	font-size: 0.8rem;
+	font-weight: normal;
+	border: 1px solid #5a5c69;
+	border-radius: 0.5rem;
+}
+.modal-text:focus {
+	outline: none;
+}
+.modal-text::-webkit-scrollbar{
+	width: 20px;
+}
+.modal-text::-webkit-scrollbar:hover{
+	cursor: pointer;
+}
+.modal-text::-webkit-scrollbar-corner{
+	background: transparent;
+}
+.modal-text::-webkit-scrollbar-thumb{
+	outline: none;
+	border: 5px solid #fff;
+	border-radius: 10px;
+	background: #5865F2;
+	min-height: 40px;
+}
+.modal-text::-webkit-scrollbar-thumb:hover{
+	background: #3442ef;
+	cursor: pointer;
+}
+.modal-text::-webkit-scrollbar-track{
+	box-shadow: none;
+	background-color: transparent;
+}
+/* 모달 영역 */
+
+
+
+

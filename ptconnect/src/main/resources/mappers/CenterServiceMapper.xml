@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.CenterServiceMapper">
+
+	<select id="centerInfoView" parameterType="int" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
+		, t.tnNo, t.ctNo, c.flNo, t.tnOneLine, t.tnIntro, t.tnTicket
+		, c.ctName, c.ctIntro, c.ctInfo, c.ctPrice
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		, (SELECT q.qualify FROM qualify q WHERE q.tnNo = t.tnNo AND q.qlDelYN = 'N') AS qualify
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN != 'Y'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		AND t.tnNo = #{tnNo};
+	</select>
+	
+	<select id="centerInfoView_photos" parameterType="int" resultType="fdo">
+		SELECT fdNo, flNo, fdName, fdPName, fdDelYN
+		FROM filedetail
+		WHERE flno = #{flNo} AND fdDelYN = 'N'
+		ORDER BY fdno ASC;
+	</select>
+	
+	<update id="centerModify" parameterType="cio">
+		UPDATE centerinfo SET flNo=#{flNo}, ctName = #{ctName}, ctIntro = #{ctIntro}, ctPrice = #{ctPrice}
+		<!-- , ctDelYN='A'-->, ctOperate = #{ctOperate}, ctInfo = #{ctInfo}, ctDateM = now()
+		WHERE ctNo = #{ctNo} and mbNo = #{mbNo}
+	</update>
+	
+	<select id="centerSelectOne" parameterType="int" resultType="cio">
+		SELECT *
+		FROM centerinfo
+		WHERE mbNo = #{mbNo} ORDER BY ctNo desc limit 1
+	</select>
+	
+<!-- 트레이너정보에서 센터검색에 필요한 기능 -->
+	<select id="trainerCenterSelectOne" parameterType="int" resultType="cio">
+		SELECT *
+		FROM centerinfo
+		WHERE ctNo = #{ctNo} AND ctDelYN = 'N' ORDER BY ctNo desc limit 1
+	</select>
+	<select id="centerFind" parameterType="String" resultType="cio">
+		select ci.ctNo, ci.ctName, m.mbAddr
+		from centerinfo ci 
+		join member m on ci.mbNo = m.mbNo 
+		where ci.ctName like '%${ctName}%'
+		order by 1 desc;
+	</select>
+	
+<!-- 	트레이너 승인 -->
+	<select id="cTrainerRegisterList" parameterType="scri" resultType="tio">
+		select *
+		from trainerinfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'C' and t.ctNo=#{ctNo}
+		order by t.tnNo DESC limit #{page},#{perPageNum}
+	</select>
+	
+	<select id="cTrainerRegisterTotalCount" parameterType="int" resultType="int">
+		select COUNT(*)
+		from trainerinfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'C' and t.ctNo=#{ctNo}
+		order by t.tnNo DESC
+	</select>
+	
+	<update id="cTrainerRegist" parameterType="int">
+		update trainerinfo set tnDelYN = 'A', tnDateM = now()
+		where tnNo = #{tnNo}
+	</update>
+	
+	<select id="otherTrainerSelect" parameterType="int" resultType="int">
+		select COUNT(*) from trainerinfo where mbNo = #{mbNo} and tnDelYN != 'A'
+	</select>
+	<update id="otherTrainerUnregist" parameterType="tio">
+		update trainerinfo set tnDelYN = 'Y', tnDateM = now()
+		where tnNo not in(#{tnNo}) and mbNo = #{mbNo};
+	</update>
+	
+	
+	<!-- 선택한 트레이너 정보 불러옴 -->
+	<select id="centerTrainerInfo" parameterType="scri" resultType="tio">
+		SELECT m.*
+		, t.tnNo, t.ctNo, t.flno, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		, (SELECT q.qualify FROM qualify q WHERE q.tnNo = t.tnNo AND q.qlDelYN = 'N') AS qualify
+		, (SELECT f.fdName FROM filedetail f WHERE f.flNo = t.flNo AND f.fdDelYN = 'N' ORDER BY f.fdNo ASC limit 1) AS tnImage
+		, l.lpCF, l.lpCount, l.lessonPrice
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		JOIN lessonprice l ON t.tnNo = l.tnNo AND l.lpDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		AND t.ctNo = #{ctNo}
+		order by t.tnNo DESC limit #{page},#{perPageNum}
+	</select>
+	
+	<!-- 선택한 트레이너의 사진들 불러옴 -->
+	<select id="TrainerInfoView_photos" parameterType="int" resultType="fdo">
+		SELECT fdNo, flNo, fdName, fdPName, fdDelYN
+		FROM filedetail
+		WHERE flno = #{flno} AND fdDelYN = 'N'
+		ORDER BY fdno ASC
+	</select>
+	
+	<!-- 선택한 트레이너의 프로그램들 불러옴 -->
+	<select id="trainerInfoView_Programs" parameterType="int" resultType="tio">
+		SELECT p.* FROM program p
+		JOIN trainerinfo t ON p.tnNo = t.tnNo AND t.tnDelYN = 'N'
+		WHERE p.pgDelYN = 'N' AND p.tnNo = #{tnNo};
+	</select>
+	
+	<select id="centerTrainerTotalCount" parameterType="int" resultType="int">
+		select COUNT(*)
+		from trainerinfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'N' and t.ctNo=#{ctNo}
+		order by t.tnNo DESC
+	</select>
+	
+</mapper>

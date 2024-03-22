@@ -1,0 +1,436 @@
+@charset "UTF-8";
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.overflow-hidden{
+	overflow: hidden;
+}
+.searchTab_wrap{
+	width: 512px;
+	padding: 16px 16px 0px;
+}
+
+.searchBar_wrap {
+    box-shadow: rgba(108, 118, 128, 0.16) 1px 2px 4px, rgba(108, 118, 128, 0.16) 1px 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgb(237, 241, 245);
+    width: 480.5px;
+}
+ .searchType {
+ 	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 16px;
+    border-bottom: 1px solid rgb(228, 234, 240);
+    background: white;
+}
+  .typeFilter {
+	display: flex;
+    height: 48px;
+    line-height: 47px;
+    font-size: 14px;
+}
+
+.typeComp {
+    color: rgb(61, 69, 77);
+    cursor: pointer;
+    text-align: center;
+    min-width: 50px;
+    padding: 0px 8px;
+}
+
+.typeComp.active {
+    font-weight: bold;
+    border-bottom: 3px solid rgb(41, 46, 51);
+    color: rgb(41, 46, 51) !important;
+}
+
+.filter img {
+    height: 24px;
+}
+
+.searchBar {
+	width: 100%;
+    position: relative;
+}
+
+input::placeholder {
+	font-weight: bold;
+	color: #94959b;
+}
+  
+.searchBar input {
+    border-radius: 6px !important;
+    border: none !important;
+}
+  
+.search_btn{
+  	position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+ }
+  
+.searchBar_option{
+	padding: 12px 16px;
+    border-top: 1px solid rgb(228, 234, 240);
+    cursor: pointer;
+    background: white;
+}
+  
+.flex {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.searchBar_option img {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.searchBar_option span {
+    font-size: 16px;
+}
+  
+ 
+  .search_key{
+    color: #5865F2;
+    margin-right: 4px;
+    font-weight: bold;
+  }
+  
+  
+.filter_Initialization{
+    border-bottom: 1px solid rgb(228, 234, 240);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 16px 0px;
+}
+
+.headerComp {
+    cursor: pointer;
+}
+
+.resetFilter {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(108, 118, 128);
+    
+}
+
+.filter {
+	cursor: pointer;
+}
+  
+.filter_option{
+    padding: 0px 16px 16px;
+    border-top: 1px solid rgb(228, 234, 240);
+    display: none; /* 처음에는 숨겨진 상태 */
+}
+  
+  
+.searchForm {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.filter_option.visible {
+    display: block; /* "visible" 클래스가 추가되면 나타남 */
+    background: white;
+/* 	position: absolute; */
+/*     z-index: 3; */
+    width: 480px;
+    margin-left: -1px;
+    border-radius:0 0 6px 6px;
+    border: 1px solid rgb(237, 241, 245);
+}
+  
+  
+.reset_btn{
+  	border: none;
+  	background: white; 
+}
+
+.reset_filter{
+      font-size: 14px;
+    font-weight: 400;
+    color: rgb(108, 118, 128);
+}
+  
+.radius{
+	padding:10px;
+  	display: flex;
+  	width: 80%;
+  	height:30px;
+  	margin: 11px 0px;
+  	
+}
+
+.radius_key{
+	color: #5865F2;
+}
+  
+#radius-slider {
+	width: 99%;
+}
+  .distance{
+  	display:flex;
+  	width:100%;
+  	 backgound:blue;
+  }
+  
+  .distance li{
+  	flex: 1;
+  	padding:0 10px;
+  }
+  
+
+  
+.sorting{
+	margin-top:30px;
+	align-items: center;
+	display: flex;
+    justify-content: start;
+}
+
+.sortingBtn{
+	padding: 6px 12px;
+    border-radius: 18px;
+    background-color: #fff;
+    border: 1px solid #dae0e6;
+    color: #3d454d;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+	margin-right: 8px;
+}
+.active_round_box{
+	color: #5865F2;
+	border: 1px solid #5865F2;
+}
+
+  
+  .filterBtn button{
+  	margin-top:30px;
+	align-items: center;
+	width:100%;
+	padding:10px 10px;
+	background-color: #5865F2;
+	border-radius:10px;
+	border:none;
+	font-size:15px;
+	font-weight: bold;
+	color:white;
+	cursor: pointer;
+	
+  }
+  
+  
+  .gender{
+	margin-top:30px;
+	align-items: center;
+  	display:flex;
+  	justify-content: space-between;
+  }
+  
+  .searchResultWrap{
+	height: calc(100vh - 242px);
+	overflow: auto;
+	/* padding-top: 16px; */
+  }
+.searchResultWrap .searchResultArea{
+	width: 100%;
+}
+.filter_height_reCalc .searchResultArea{
+	padding-right: 5px; 
+}
+.filter_height_reCalc {
+	height:calc(100vh - 546px);
+}
+
+.searchResultArea .searchResultCard{
+	display: block;
+	margin-bottom: 10px;
+}
+/* .filter_height_reCalc{ */
+/* 	height: calc(100vh - 602px); */
+/* } */
+.coachCard{
+	border: 1px solid rgb(218, 224, 230);
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+	width: 468px;
+}
+  
+  .coachImages{
+  	display:flex;
+	width:100%;
+	height:130px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    gap:1px;
+    border-bottom: 1px solid rgb(237, 241, 245);
+  }
+
+ .trainerImg{
+  	width:130px;
+  	height:130px;
+	margin-right: 1px;
+  }
+
+  .gymImg{
+  width:210px;
+  height:130px;
+  }
+.coachTitle{
+	align-items: center;
+  	justify-content: space-between;
+	display:flex;
+}
+
+.coachInfo{
+	padding:12px;
+}
+
+.reviewIcon{
+	width:25px;
+	height:25px;
+	margin-right: 10px;
+}
+
+.reviewText {
+	color: #827e7e;
+}
+
+.coachReviewCnt{
+	display: flex;
+	align-items: center;
+}
+
+
+.priceInfo{
+	display:flex;
+}
+
+.priceTitle{
+	background-color:#5865F2;
+	border-radius:7px;
+	color:white;
+	padding: 1px 5px;
+}
+
+.ptPrice{
+	margin-left:15px;
+}
+
+.location{
+	display:flex;
+	align-items: center;
+	font-size: 14px;
+    font-weight: 400;
+    color: rgb(108, 118, 128);
+}
+
+.location img{
+	width:25px;
+	height:25px;
+	margin-right: 10px;
+}
+.location .locationDistance{
+	margin-left: auto;
+}
+.mapWrap{
+	position: absolute;
+    top: 84px;
+    right: 0px;
+    left: 520px;
+    width: calc(100% - 520px);
+    height: calc(100vh - 55px);
+}
+.mapResize{
+	height: 1280px;
+}
+.marker_wrap{
+    color: #5865F2;
+    background-color: white;
+    border: 1px solid #5865F2;
+    border-radius: 4px;
+    padding: 6px 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    max-width: 110px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.marker_pin{
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    left: calc(50% - 8px);
+    width: 16px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11px solid #5865F2;
+}
+.marker_pin::before{
+    content: "";
+    position: absolute;
+    bottom: 1.5px;
+    left: -8px;
+    width: 16px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11.5px solid white;
+}
+.marker_pin::after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    bottom: -3px;
+    z-index: -1;
+    left: calc(50% - 5px);
+    border-radius: 50%;
+    background: gray;
+    filter: blur(2px);
+}
+
+.searchResultWrap::-webkit-scrollbar {
+	width: 8px;
+	border: 1px solid #5865f229;
+    border-radius: 8px;
+} 
+
+.searchResultWrap::-webkit-scrollbar-thumb {
+    background-color: #5865F2;
+	border: 1px solid #5865F2;
+    border-radius: 8px;
+  }
+.searchResultWrap::-webkit-scrollbar-track {
+    background-color: #5865f229;
+}
+
+
+
+
+  
+  
+  
+  
+  
+  

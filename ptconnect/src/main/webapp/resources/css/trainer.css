@@ -1,0 +1,828 @@
+@charset "UTF-8";
+/* 센터 사진 (페이지 네비게이션 위에있는)*/
+
+.overflow-hidden{
+	overflow: hidden !important;
+}
+.overflow-auto{
+	overflow: auto !important;
+}
+.mt-10p{
+	margin-top: 10% !important;
+}
+.pt-10p{
+	padding-top: 10% !important;
+}
+
+.center_photo_box{
+    display: block;
+    height: 360px;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.center_photo_box .first{
+    float: left;
+    width: 50%;
+    height: 360px;
+}
+
+.center_photo_box .rest{
+    float: left;
+    width: 25%;
+    height: 180px;
+    vertical-align: top;
+}
+
+.center_photo_box .center_photo_view{
+    text-align: center;
+    margin-top: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+}
+
+.center_photo_box .center_photo_view i{
+    font-size: 48px;
+    display: block;
+    margin: 0px auto 9px;
+}
+
+/* 트레이너정보 */
+.left_bar{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+}
+
+.trainer_content{
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    margin-bottom: 64px;
+    position: relative;
+}
+
+.trainer_content h4{
+    font-size: 24px;
+    color: rgb(41, 46, 51);
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.trainer_content .content_wrap{
+    padding: 24px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(228, 234, 240);
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.trainer_content .content_wrap .content_text{
+	color: rgb(81, 81, 81);
+	font-size: 16px;
+	word-break: break-all;
+}
+
+.trainer_content .content_wrap .speciality{
+    margin-bottom: 12px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgb(218, 224, 230);
+}
+
+.trainer_content .content_wrap .content_wrap_title{
+    color: rgb(61, 69, 77);
+    padding: 16px 0px;
+    font-size: 20px;
+    font-weight: 700;
+    border-bottom: 1px solid rgb(218, 224, 230);
+	
+}
+
+.trainer_content .content_wrap .trophy{
+	display: flex;
+}
+.trophy:not(:first-of-type){
+	margin-top: 22px;
+}
+.trophy .div-icon{
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	margin-right: 3%;
+	height: 48px;
+	font-size: 48px;
+}
+.trophy i{
+	font-size: 20px;
+	/* width: 100%; */
+	height: 100%;
+	margin-right: 18px;
+}
+
+.trophy span{
+	display: flex;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 18px;
+}
+
+.content_wrap.rating{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content_wrap .review_rate{
+    font-size: 48px;
+    font-weight: bold;
+    color: rgb(61, 69, 77);
+}
+
+.content_wrap .review_summary{
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: start;
+    align-items: start;
+    margin-left: 12px;
+    font-size: 14px;
+    color: rgb(152, 165, 179);
+}
+
+.content_wrap .review_button_expand_wrap{
+    position: absolute;
+    top: -16px;
+    filter: drop-shadow(rgba(108, 118, 128, 0.16) 0px 4px 8px);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.review_button_expand_wrap .review_button_expand:first-child{
+    border-bottom: 1px solid rgb(218, 224, 230);
+}
+
+.review_button_expand_wrap .review_button_expand{
+    width: 100%;
+    min-width: 190px;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 14px;
+    color: rgb(108, 118, 128);
+    cursor: pointer;
+}
+
+.content_wrap .review_write_button{
+    height: 60px;
+    min-width: 180px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #5865F2;
+    border: 1px solid #5865F2;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.content_wrap .review_write_button i{
+	font-size: 24px;
+    height: 24px;
+    width: 24px;
+    margin-right: 18px;
+}
+
+.content_wrap .photo_box{
+    margin: 0px -1% 12px;
+}
+
+.content_wrap .photo_box .photo_wrap{
+    width: 23%;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 1%;
+}
+
+.photo_rel{
+    position: relative;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+.photo_abs{
+    position: absolute;
+    inset: 0px;
+}
+
+.photo_size{
+    position: absolute;
+    border-radius: 6px;
+    inset: 0px;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.review{
+    border-bottom: 1px solid rgb(237, 241, 245);
+    padding: 32px 0px;
+}
+
+.review .review_header{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.review .user_name{
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    font-weight: 700;
+}
+
+.review .date{
+    font-size: 14px;
+    color: rgb(108, 118, 128);
+    margin-left: 4px;
+}
+
+.review .review_star{
+    margin: 0px;
+    display: inline;
+    vertical-align: baseline;
+	
+}
+
+.review .review_context{
+    margin-left: 58px;
+	margin-right: 58px;
+    display: block;
+}
+
+.review .photo_box{
+    margin-top: 8px;
+}
+
+.content_wrap .photo_box .photo_wrap.review_photo{
+    width: 90px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.review .review_context .review_text{
+    margin-top:16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(61, 69, 77);
+    background: rgb(237, 241, 245);
+	border-radius: 5px;
+    padding: 15px;
+}
+
+.review .review_context .reply_comment{
+    margin-top: 12px;
+    background-color: rgb(237, 241, 245);
+    padding: 12px;
+    white-space: pre-line;
+}
+
+.view_review_button{
+    margin: 0px;
+    padding: 12px 24px;
+    height: 48px;
+    width: 100%;
+    color: #5865F2;
+    background-color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #5865F2;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.content_wrap .price_head{
+    color: rgb(61, 69, 77);
+    font-size: 18px;
+    padding: 0px 0px 12px;
+    text-overflow: ellipsis;
+    line-height: 40px;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(218, 224, 230);
+}
+
+.content_wrap .price_table:last-child{
+    margin-bottom: 0px;
+}
+
+.content_wrap .price_table .price_line{
+    border-bottom: 1px solid rgb(218, 224, 230);
+    display: flex;
+    text-align: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0px 32px;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 72px;
+}
+
+.price_table .price_line .price_count{
+    font-size: 16px;
+}
+
+.price_table .price_line .price{
+    display: block;
+    font-size: 16px;
+    text-align: end;
+}
+
+.price_line .price .price_per{
+    display: block;
+    font-size: 16px;
+}
+
+.price_line .price .price_per strong{
+    font-size: 18px;
+}
+
+.price_line .price .price_total{
+    color: rgb(108, 118, 128);
+    font-size: 14px;
+}
+
+.content_wrap .center{
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: start;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.content_wrap .center .contact{
+    text-decoration: underline;
+    color: rgb(108, 118, 128);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.content_wrap .center strong{
+    margin-right: 8px;
+}
+
+
+.content_wrap .center_location{
+	margin-top: 20px;	
+    height: 360px;
+    border: solid 2px #5865F2;
+    border-radius: 10px;
+}
+
+
+/* 프로필 */
+.right_bar{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.trainer_profile{
+    width: 100%;
+    text-align: center;
+    position: sticky;
+    top: calc(134px);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(108, 118, 128, 0.16) 0px 4px 8px;
+    border: 1px solid rgb(218, 224, 230);
+    border-radius: 12px;
+}
+
+.trainer_profile .upside{
+    position: relative;
+	padding: 24px;
+}
+
+.trainer_profile .upside .report_button{
+    position: absolute;
+	right: 30px;
+	top: 30px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+.trainer_profile .upside .trainer_round_image{
+    cursor: pointer;
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+}
+
+.trainer_profile .upside .trainer_name{
+    font-size: 18px;
+    color: rgb(41, 46, 51);
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.upside .center_name, .upside .review_wrap{
+	margin-left: 5px;
+}
+
+.trainer_profile .upside .center_name{
+	text-decoration: underline;
+	color: rgb(108, 118, 128);
+	font-size: 14px;
+	margin-top: 4px;
+	cursor: pointer;
+}
+
+.trainer_profile .upside .stars{
+	margin-top: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+}
+
+.trainer_profile .upside .stars .count{
+	text-decoration: underline;
+}
+
+.upside .stars .rating{
+	font-weight: bold;
+	color: rgb(61, 69, 77);
+}
+
+.upside .stars .count{
+	font-weight: bold;
+	color: rgb(108, 118, 128);
+	cursor: pointer;
+}
+
+.trainer_profile .upside .pickup_line{
+    word-break: keep-all;
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.trainer_profile .upside .list_wrap{
+    width: 90%;
+    text-align: start;
+    margin: 12px auto 0px;
+    font-size: 14px;
+    color: rgb(61, 69, 77);
+}
+
+.trainer_profile .upside .flex_box{
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: start;
+    -webkit-box-align: start;
+    align-items: start;
+    word-break: keep-all;
+}
+
+.upside .list_wrap .left{
+    font-weight: bold;
+    margin-right: 8px;
+    min-width: 52px;
+}
+
+.trainer_profile .downside{
+    padding: 24px;
+    background-color: rgb(247, 249, 250);
+    border-radius: 12px;
+    display: flex;
+}
+
+.order{
+    color: white;
+    border-radius: 6px;
+    background: #5865F2;
+    margin: auto;
+    cursor: pointer;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: bold;
+	border: none;
+	width: 60%;
+}
+
+.trainer_profile .downside .counseling{
+    color: #5865F2;
+    border-radius: 6px;
+	border: 1px solid #5865F2;
+    margin: auto;
+    cursor: pointer;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: bold;
+	background: white;
+	width: 36%;
+}
+
+.trainer_profile .downside .counseling i{
+    height: 24px;
+    margin-right: 6px;
+}
+
+.order:hover {
+	background: #414cc4;
+}
+
+.edit {
+    color: #5865F2;
+    padding: 6px 12px;
+    background-color: #5865f229;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 6px;
+}    
+
+.trainer_info textarea{
+	padding: 0;
+	line-height: 2.5!important;
+}
+
+/* 미리보기 이미지 영역 */
+	#previews {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+		overflow-y: scroll;
+		position: absolute;
+	}
+
+	#previews img {
+		width: 97%;
+		height: 100%;
+		margin: 5px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		object-fit: cover; 
+	}
+
+/*이미지 첨부*/
+	
+	.file {
+		display: none;
+	}
+	
+	.upload-box {
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.upload-box .drag-file {
+		position: relative;
+		width: 97%;
+		height: 360px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border: 3px dashed #dbdbdb;
+		border-radius: 8px;
+	}
+	.upload-box .drag-file.highlight {
+		border: 3px dashed red;
+	}
+	.upload-box .drag-file .image {
+		width: 40px;
+	}
+	.upload-box .drag-file .message {
+		margin-bottom: 0;
+	}
+	.upload-box .drag-file .preview {
+		display: none;
+		position: absolute;
+		left: 0;
+		height: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.upload-btn {
+		margin: 25px 0 5px 0;
+	}
+
+	.file-label {
+		color: #5865f2;
+	    border-radius: 6px;
+	    background: #ffffff;
+	    cursor: pointer;
+	    line-height: 48px;
+	    font-size: 16px;
+	    font-weight: bold;
+	    border: 1px solid #5865f2;
+	    display: block;
+		text-align: center;
+	}
+	
+.priceTable {
+    border: 1px solid rgb(218, 224, 230);
+    border-radius: 6px;
+    padding: 0px 16px 8px;
+    border-collapse: unset;
+}
+
+.priceTable th {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(61, 69, 77);
+    text-align: center;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image: initial;
+    border-bottom: 1px solid rgb(218, 224, 230);
+    padding: 16px;
+}
+
+.priceTable td {
+    border: none;
+    padding: 8px;
+}
+
+.qualify-label, .program-label {
+    color: #5865f2;
+    border-radius: 6px;
+    background: #ffffff;
+    cursor: pointer;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #5865f2;
+	display: block;
+    text-align: center;
+}
+
+.qualify-button, .program-button {
+    display: none;
+}
+
+.write {
+	padding: 25px 100px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lpCf {
+	text-align: right;
+}
+
+#imagePreviewContainer {
+	overflow: auto;
+    height: 450px;
+    border: 1px solid #5865f236;
+    border-radius: 8px;
+    
+}
+
+.marker_wrap{
+    background-color: white;
+    border: 1px solid rgb(255, 128, 0);
+    border-radius: 4px;
+    padding: 6px 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    max-width: 110px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    color: rgb(61, 69, 77);
+}
+
+.marker_pin{
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    left: calc(50% - 8px);
+    width: 16px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11px solid rgb(255, 128, 0);
+}
+
+
+
+/* 지도 위에 마커 CSS 영역 */
+.marker_pin::before{
+    content: "";
+    position: absolute;
+    bottom: 1.5px;
+    left: -8px;
+    width: 16px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 11.5px solid #5865F2;
+}
+.marker_pin::after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    bottom: -3px;
+    z-index: -1;
+    left: calc(50% - 5px);
+    border-radius: 50%;
+    background: gray;
+    filter: blur(2px);
+}
+/* 지도 위에 마커 CSS 영역 */
+
+.search_wrap h4 {
+	font-size: 24px;
+    color: rgb(41, 46, 51);
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.center_search {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.user_input .search_btn {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+}
+
+.centerCheckbox {
+	display: flex;
+    justify-content: space-around;
+}
+
+.trainer_notice {
+	font-size: 13px;
+    color: rgb(61, 69, 77);
+    position: relative;
+    padding: 5px 15px;
+}
+
+.trainer_notice_line {
+	background: #e4eaf0;
+	border: 1px solid rgb(228, 234, 240);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    padding: 10px 20px;
+	margin-top: -30px;
+}
+
+.notice_wrap li {
+	list-style: disc;
+	margin: 5px 0;
+}
+
+.t_notice {
+	padding: 5px 25px;
+    border-radius: 6px;
+    background: #e4eaf0;
+    font-size: 13px;
+    margin-bottom: 15px;
+}

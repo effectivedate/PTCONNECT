@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.AdminServiceMapper">
+
+	<select id="adminMain" resultType="ao">
+		SELECT * FROM member(mbAuth, mbEmail, mbPwd, mbPwdSalt, mbName, mbphone, mbAddr)
+		VALUES(#{mbAuth}, #{mbEmail}, #{mbPwd}, #{mbPwdSalt}, #{subject}, #{contents}, #{writer}, #{filename2}, #{pwd})
+	</select>
+	
+	<select id="centerRegisterTotalCount" resultType="int">
+		select COUNT(*) from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
+		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC
+	</select>
+	<select id="centerRegisterList" parameterType="scri" resultType="cio">
+		select * from centerinfo c join (select * from member where mbDelYN='N') m on c.mbNo=m.mbNo
+		where c.ctDelYN = 'R' OR c.ctDelYN = 'Y' order by c.ctNo DESC limit #{page},#{perPageNum}
+	</select>
+	<select id="trainerRegisterTotalCount" resultType="int">
+		select COUNT(*)
+		from trainerinfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'A'
+		order by t.tnNo DESC
+	</select>
+	<select id="trainerRegisterList" parameterType="scri" resultType="tio">
+		select *
+		from trainerinfo t
+		join (select * from member where mbDelYN='N') m on t.mbNo=m.mbNo
+		where t.tnDelYN = 'A'
+		order by t.tnNo DESC limit #{page},#{perPageNum}
+	</select>
+	<select id="registredProductTotalCount" resultType="int">
+		select Count(*) 
+		from trainerinfo t 
+		join member m on t.mbNo=m.mbNo 
+		left join (select * from centerinfo where ctDelYN='N') c on t.ctNo = c.ctNo
+		where t.tnDelYN = 'N' and m.mbDelYN='N' 
+		order by t.tnNo DESC
+	</select>
+	<select id="registredProductList" parameterType="scri" resultType="tio">
+		select * 
+		from trainerinfo t 
+		join member m on t.mbNo=m.mbNo 
+		left join (select * from centerinfo where ctDelYN='N') c on t.ctNo = c.ctNo
+		where t.tnDelYN = 'N' and m.mbDelYN='N'
+		order by t.tnNo DESC limit #{page},#{perPageNum}
+	</select>
+	<update id="centerRegist" parameterType="int">
+		update centerinfo set ctDelYN = 'N', ctDateM = now()
+		where ctNo = #{ctNo}
+	</update>
+	<update id="trainerRegist" parameterType="int">
+		update trainerinfo set tnDelYN = 'N', tnDateM = now()
+		where tnNo = #{tnNo}
+	</update>
+	<select id="otherTrainerSelect" parameterType="int" resultType="int">
+		select COUNT(*) from trainerinfo where mbNo = #{mbNo} and tnDelYN != 'N'
+	</select>
+	<update id="otherTrainerUnregist" parameterType="tio">
+		update trainerinfo set tnDelYN = 'Y', tnDateM = now()
+		where tnNo not in(#{tnNo}) and mbNo = #{mbNo};
+	</update>
+	<select id="tradedProductTotalCount" resultType="int">
+		select COUNT(*) 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.mbNo is not null or o.nmNo is not null
+		order by o.odDate DESC
+	</select>
+	<select id="tradedProductList" parameterType="scri" resultType="po">
+		select * 
+		from order_ o
+		join orderproduct op on o.odNo = op.odNo
+		join payment p ON o.odNo = p.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.mbNo is not null or o.nmNo is not null
+		order by o.odDate DESC limit #{page},#{perPageNum}
+	</select>
+	<select id="tradedProductDetail" parameterType="String" resultType="po">
+		select * 
+		from order_ o
+		join payment p ON o.odNo = p.odNo
+		join orderproduct op on o.odNo = op.odNo
+		left join paymentcancle pc ON o.odNO = pc.odNo
+		left join (select mbNo, mbName, mbPhone from member) m on o.mbNo = m.mbNo
+		left join (select nmNo, nmName, nmPhone from nonmember) n on o.nmNo = n.nmNo
+		left join (select m2.mbName as tnName, t2.tnNo from trainerinfo t2 join member m2 on t2.mbNo = m2.mbNo) t on op.tnNo = t.tnNo
+		where o.odNo = #{odNo}
+	</select>
+	
+	<insert id="boardWrite" parameterType="bdo" useGeneratedKeys="true" keyProperty="bdNo">
+		<selectKey resultType="int" keyProperty="bdNo"  order="AFTER">
+		select max(bdNo) as bdNo from board
+		</selectKey>
+		insert into board(mbNo)
+		values(#{mbNo})
+	</insert>
+	
+	<insert id="noticeWrite" parameterType="bdo">
+		insert into notice(bdNo, ntTitle, ntContent)
+		values(#{bdNo}, #{ntTitle}, #{ntContent})
+	</insert>
+	
+	<insert id="FAQWrite" parameterType="bdo">
+		insert into FAQ(bdNo, FAQTitle, FAQContent)
+		values(#{bdNo}, #{FAQTitle}, #{FAQContent})
+	</insert>
+	
+	<update id="boardModify" parameterType="bdo">
+		update board set bdDateM = now()
+		where bdNo = #{bdNo} and bdDelYN = 'N'
+		ORDER BY bdNo desc limit 1;
+	</update>
+	
+	<update id="noticeModify" parameterType="bdo">
+		update notice set ntTitle = #{ntTitle}, ntContent = #{ntContent}
+		where bdNo = #{bdNo}
+		ORDER BY bdNo desc limit 1;
+	</update>
+	
+	<update id="FAQModify" parameterType="bdo">
+		update FAQ set FAQTitle = #{FAQTitle}, FAQContent = #{FAQContent}
+		where bdNo = #{bdNo}
+		ORDER BY bdNo desc limit 1;
+	</update>
+	
+	<update id="boardDelete" parameterType="bdo">
+		update board set bdDelYN = 'Y'
+		where bdNo = #{bdNo}
+		ORDER BY bdNo desc limit 1;
+	</update>
+	
+	<select id="boardSelectOne" parameterType="int" resultType="bdo">
+		SELECT n.*, f.*, m.*, DATE(b.bdDate) as bdDate, b.bdNo, b.mbNo, b.bdDelYN
+		FROM board b
+		LEFT JOIN notice n ON b.bdNo = n.bdNo
+		LEFT JOIN FAQ f ON b.bdNo = f.bdNo
+		join member m on b.mbNo = m.mbNo
+		WHERE b.bdNo = #{bdNo} AND b.bdDelYN = 'N'
+		ORDER BY b.bdNo desc limit 1
+	</select>
+	
+	<select id="noticeSelectAll" parameterType="scri" resultType="bdo">
+		SELECT n.*, m.*, DATE(b.bdDate) as bdDate, b.bdNo, b.mbNo, b.bdDelYN
+		FROM board b
+		JOIN notice n ON b.bdNo = n.bdNo
+		join member m on b.mbNo = m.mbNo
+		WHERE b.bdDelYN = 'N'
+		ORDER BY b.bdNo desc limit #{page},#{perPageNum}
+	</select>
+	
+	<select id="FAQSelectAll" parameterType="scri" resultType="bdo">
+		SELECT f.*, m.*, DATE(b.bdDate) as bdDate, b.bdNo, b.mbNo, b.bdDelYN
+		FROM board b
+		JOIN FAQ f ON b.bdNo = f.bdNo
+		join member m on b.mbNo = m.mbNo
+		WHERE b.bdDelYN = 'N'
+		ORDER BY b.bdNo desc limit #{page},#{perPageNum}
+	</select>
+	
+	<select id="noticeTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM board b
+		JOIN notice n ON b.bdNo = n.bdNo
+		WHERE b.bdDelYN = 'N'
+	</select>
+	
+	<select id="FAQTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM board b
+		JOIN FAQ f ON b.bdNo = f.bdNo
+		WHERE b.bdDelYN = 'N'
+	</select>
+	
+</mapper>

@@ -1,0 +1,630 @@
+@charset "UTF-8";
+
+.table-head {
+	font-weight: bold;
+	background: #4e73df14;
+}
+
+.table td {
+	vertical-align: middle;
+}
+
+.review-list:hover {
+	background-color: #4e73df14; 
+}
+
+.table .review-list.toggled {
+	outline: 3px solid #4e73df66;
+	border-bottom: none;
+}
+
+.review-cont {
+	border-top: none;
+	height: 150px;
+}
+
+.cont-area {
+	display: flex;
+	align-items: center;
+	height: 150px;
+	background: #4e73df14;
+	border-radius: 5px;
+}
+
+.list-checkbox {
+	width: 5%;
+}
+
+.list-writer {
+	width: 13%;
+}
+
+.list-trainer {
+	width: 13%;
+}
+
+.list-cont {
+	width: 45%;
+}
+
+.list-date {
+	width: 15%;
+}
+
+.list-delete{
+	width: 9%;
+}
+
+.list-delete-btn {
+	border-radius: 0.35rem;
+	border: none;
+	background: #324a91;
+	padding: 7px;
+	font-weight: bold;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	margin-left: 5px;
+	color: white;
+}
+.list-delete-btn:hover {
+	background: #324a91b3;
+}
+
+.review-delete-btn {
+	padding: 4px;
+	font-weight: bold;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	margin-left: 5px;
+	width: 80px;
+	border-radius: 0.35rem;
+	border: none;
+	background: #4e73df;
+	color: white;
+}
+
+.review-delete-btn:hover {
+	background: #4e73dfb0;
+}
+
+.cont-writer{
+	width: 10%;
+}
+
+.cont-photo {
+	width: 25%;
+}
+
+.cont-detail {
+	width: 50%;
+}
+
+.cont-date {
+	width: 15%;
+}
+
+/* admin-point */
+
+.point-list:hover {
+	background-color: #4e73df14;
+}
+
+.d-none {
+	margin-bottom: 0.5rem !important;
+}
+
+.point-order {
+	width: 15%;
+}
+
+.point-user {
+	width: 15%;
+}
+
+.point-cont {
+	width: 30%;
+}
+
+.point-change {
+	width: 12%;
+}
+
+.point-remain {
+	width: 13%;
+}
+
+.point-date {
+	width: 15%;
+}
+
+/* admin-point-detail */
+
+.search {
+	text-align: center;
+	margin-bottom: 170px;
+	margin-top: 120px;
+}
+
+.input-point {
+	border: 1px solid #a4a6b3;
+	border-radius: 0.35rem;
+	font-size: 1rem;
+	padding: 0.375rem 0.75rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.cname {
+	width: 163px;
+}
+
+.cperc {
+	width: 144px;
+}
+
+.input-point:focus {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #bac8f3;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.point-list button {
+	padding: 8px;
+	font-weight: bold;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	margin-left: 5px;
+}
+
+.point-insert {
+	border-radius: 0.35rem;
+	border: none;
+	background: #4e73df;
+	color: white;
+}
+
+.point-delete{
+	border-radius: 0.35rem;
+	border: none;
+	background: #324a91;
+	color: white;
+}
+
+.point-insert:hover{
+	background: #4e73dfb0
+}
+
+.point-delete:hover{
+	background: #324a91b3;
+}
+
+.search .input-group > .form-control {
+	width: 500px;
+	height: 45px;
+	font-size: 20px;
+}
+
+.search .btn-primary {
+	background-color: #4e73df;
+	border-color: #4e73df;
+	transition: 0.2s ease-in-out;
+}
+
+/* admin-coupon-list */
+
+.coupon-list:hover {
+	background-color: #4e73df14; 
+}
+
+.coupon-list button, .coupon-insert-btn, .coupon-delete-btn, .coupon-modify-btn, .coupon-stop-btn {
+	padding: 4px;
+	font-weight: bold;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	margin-left: 5px;
+	width: 80px;
+}
+
+.coupon-delete-btn, .coupon-stop-btn {
+	border-radius: 0.35rem;
+	border: none;
+	background: #324a91;
+	color: white;
+}
+
+.coupon-insert-btn, .coupon-modify-btn {
+	border-radius: 0.35rem;
+	border: none;
+	background: #4e73df;
+	color: white;
+}
+
+.coupon-delete-btn:hover {
+	background: #324a91b3;
+}
+
+.coupon-insert-btn:hover {
+	background: #4e73dfb0;
+}
+
+.coupon-modify-btn:hover {
+	background: #4e73dfb0;
+}
+
+.coupon-stop-btn:hover {
+	background: #324a91b3;
+}
+
+/* admin-coupon */
+
+.coupon {
+	margin-top: 200px;
+    margin-left: 600px;
+	width: 30%;
+	padding: 10px;
+}
+
+.ctb {
+	border: none;
+}
+
+.ctb td{
+	border: none;
+}
+
+.table select {
+    width: 160px;
+    border: 1px solid #a4a6b3;
+    box-sizing: border-box;
+    border-radius: 0.35rem;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.table select:focus {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #bac8f3;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.coupon-creat {
+	text-align: center;
+    margin-bottom: 20px;
+}
+
+.coupon-creat-btn, .coupon-cancle-btn {
+	border-radius: 0.35rem;
+	border: none;
+	background: #4e73df;
+	padding: 15px 100px;
+	font-weight: bold;
+	font-size: 15px;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	color: white;
+}
+
+.coupon-creat-btn:hover {
+	background-color: #4e73dfb0
+}
+
+.coupon-cancle-btn {
+	background: #324a91;
+}
+
+.coupon-cancle-btn:hover {
+	background: #324a91b3;
+}
+
+/* admin-notice */
+
+.notice-modify-btn, .notice-delete-btn, .notice-write-btn {
+	padding: 4px;
+	font-weight: bold;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	margin-left: 5px;
+	width: 80px;
+}
+
+.notice-modify-btn, .notice-write-btn {
+	border-radius: 0.35rem;
+	border: none;
+	background: #4e73df;
+	color: white;
+}
+
+.notice-modify-btn:hover {
+	background: #4e73dfb0
+}
+
+.notice-delete-btn {
+	border-radius: 0.35rem;
+	border: none;
+	background: #324a91;
+	color: white;
+}
+
+.notice-delete-btn:hover {
+	background: #324a91b3;
+}
+
+.notice-write-btn:hover {
+	background: #4e73dfb0
+}
+
+.notice-subject:hover {
+	cursor: pointer;
+}
+
+.notice-num {
+	width: 10%;
+}
+
+.notice-writer {
+	width: 16%;
+}
+
+.notice-subject {
+	width: 30%;
+}
+
+.notice-date {
+	width: 15%;
+}
+
+.notice-delete {
+	width: 15%;
+	text-align: right;
+}
+
+.notice-delete button {
+	width: 60px;
+}
+
+.notice-wirte-area {
+	display: flex; 
+	justify-content: flex-end; 
+	margin-right: 12px;
+}
+
+.notice-wirte-area button {
+	width: 80px;
+}
+
+/* admin-notice-write */
+
+.notice-write-sub {
+	margin: 50px 0 20px 0;
+}
+
+.notice-write-cont {
+	margin: 20px 0 20px 0;
+	width: 700px;
+}
+
+.notice-write-sub input { 
+	width: 70%;
+}
+
+.notice-write-cont textarea {
+	width: 70%;
+	height: 500px;
+}
+
+.notice-write-btn-area {
+	margin: 20px 0 20px 0;
+}
+
+.notice-write-btn-area button {
+	padding: 10px;
+	width: 200px;
+}
+
+.notice-write-sub .input-point, .notice-write-cont .input-point {
+	/* border: 3px solid #a4a6b3; */
+	box-shadow: 1px 1px 5px 1px #b2abab;
+	border: none;
+	width: 100%;
+}
+
+/*FAQ 리스트 영역*/
+.contents-area{
+	margin: 50px auto;
+	width: 100%;
+}
+.qna-contents{
+	width: 100%;
+}
+.list-area{
+	width: 100%;
+}
+.QnA-item{
+	background-color: #fff;
+	border: 0;
+	border-radius: 10px;
+	margin: 20px 0;
+	padding: 20px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);;
+}
+.QnA-item:hover{
+	cursor: pointer;
+}
+.QnA-item.active{
+	outline: 2px solid #5865f2b8;
+}
+
+.QnA-title{
+    margin: 0 35px 20px 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: rgb(108, 118, 128);
+}
+.QnA-Answer{
+	display: none;
+	margin: 30px 0 0;
+}
+.QnA-item.active .QnA-Answer{
+	display: block;
+    background: rgba(218, 224, 230, 0.38);;
+    margin: 0;
+    height: auto;
+    border-radius: 10px;
+    padding: 20px;
+    color: rgb(108, 118, 128);
+}
+.QnA-toggle{
+	background-color: transparent;
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	height: 30px;
+	width: 30px;
+}
+.QnA-toggle .fa-chevron-down{
+	color: #4b55dd;
+}
+.QnA-toggle .fa-chevron-up{
+	display: none;
+}
+.QnA-item.active .QnA-toggle .fa-chevron-up{
+	color: #4b55dd;
+	display: block;
+}
+.QnA-item.active .QnA-toggle .fa-chevron-down{
+	display: none;
+}
+/*FAQ 리스트 영역*/
+
+/*삭제, 수정, 글쓰기 버튼 영역*/
+.btn-area{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.div-btn{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+}
+.btn-area button{
+	padding: 10px 50px;
+	font-weight: bold;
+	font-size: 15px;
+	transition: 0.2s ease-in-out;
+	box-shadow: 1px 1px 3px 0px darkgray;
+	border-radius: 0.35rem;
+	border: none;
+}
+.btn-area button:active{
+	transform: scale(0.95);
+}
+.btn-area button:hover{
+	cursor: pointer;
+}
+.btn-delete{
+	margin-left: 1%;
+	background: #324a91;
+	color: white;
+}
+.btn-modify{
+	background: #4e73df;
+	color: white;
+}
+
+.btn-delete:hover {
+	background: #324a91b3;
+}	
+
+.btn-modify:hover {
+	background: #4e73dfb0;
+}
+
+.btn-area2{
+	margin: 50px auto 30px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+}
+.btn-write{
+	color: #fff;
+	background-color: #5486C9;
+}
+
+.btn:focus {
+	box-shadow: unset;
+}
+
+.faq {
+	text-align: right;
+}
+/*삭제, 수정, 글쓰기 버튼 영역*/
+
+/* admin-notice-detail*/
+
+.notice-area {
+	padding: 50px;
+	color: black;
+	font-weight: bold;
+}
+
+.notice-head {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-height: 110px;
+    padding: 27px 0 20px 0;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    word-break: break-all;
+}
+
+.notice-info {
+	text-align: right;
+}
+
+.notice-data {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 50px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail {
+	margin: 0 45px 20px;
+	text-align: center;
+}
+
+/* admin-index */
+
+.col-xl-8 {
+    flex: 1 0 66.66667%;
+    max-width: 100%;
+}
+
+.reviewCard {
+	display: flex !important; 
+	flex-direction: column !important;
+	align-items: center !important;
+}

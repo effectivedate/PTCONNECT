@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+
+.orderListBox{
+    margin: 8px;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+	align-items: center;
+    background-color : white;
+    flex-direction: row;
+    border: 1px solid grey;
+    border-radius: 16px;
+    min-width: 870px;
+}
+.orderProfile{
+	width:50px;
+	height:50px;
+	border-radius: 25px;
+}
+.orderContainer{
+	margin-left:8px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+.orderName{
+	color:black;
+	font-size: 16px;
+	font-weight: bold;
+}
+.orderText{
+	color: black;
+	font-size: 16px;
+}
+.paymentCancle {
+	height: 48px;
+    width: 100%;
+    background-color: #5865F2;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 15px;
+	font-weight: bold;
+    color: rgb(255, 255, 255);
+    border: 1px solid #5865F2;
+    margin: 0px;
+    cursor: pointer;
+}
+.paymentComplete {
+	font-weight: bold;
+    height: 48px;
+    width: 100%;
+    background-color: #ccccd3;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 15px;
+    color: rgb(109 101 101);
+    border: 1px solid #ccccd3;
+    margin: 0px;
+}
+
+/* 페이징 */
+
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem !important;
+}
+.mt-4, .my-4 {
+    margin-top: 1.5rem !important;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+.col-lg-12{
+	osition: relative;
+    width: 100%;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+}
+.pagination-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.35rem;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #4e73df;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+}
+a {
+	text-decoration: none;
+}
+
+
+.searchDate {
+	margin-bottom: 20px;
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	padding: 30px;
+	min-width: 724px;
+}
+
+.searchDate label {
+	display: block;
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+.searchDate input[type="date"] {
+	width: 200px;
+	padding: 8px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.searchDate button {
+	padding: 10px 20px;
+	background-color: #5865F2; 
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.searchDate button:hover {
+	background-color: #3854AD;
+}
+
+.searchDateBtn {
+	margin-left: 10px;
+	margin-top: -9px;
+}

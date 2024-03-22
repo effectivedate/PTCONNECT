@@ -1,0 +1,115 @@
+@charset "UTF-8";
+#modal_wrap{
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: none;
+    height: 100%;
+    justify-content: center;
+    left: 0px;
+    padding: 10px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 2001;
+    background: rgba(0, 0, 0, 0.8);
+}
+.modal_body{
+    margin-bottom: 60px;
+    max-width: 920px;
+    position: relative;
+    overflow: auto;
+}
+
+.modal_photo{
+    display: block !important;
+    height: auto !important;
+    margin: 0px auto !important;
+    max-width: 100% !important;
+    user-select: none !important;
+    transition: opacity 0.3s ease 0s !important;
+    opacity: 1 !important;
+}
+.close_button {
+    height: 40px;
+}
+#close_btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    top: 5px;
+    vertical-align: bottom;
+    z-index: 1;
+    height: 40px;
+    margin-right: -20px;
+    padding: 10px;
+    width: 40px;
+    fill: white;
+    float: right;
+}
+
+#close_btn span{
+	color: white;
+	font-size:30px;
+}
+
+.swiper {
+    margin: 0px !important;
+}
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	width: fit-content;
+}
+.swiper-slide img {
+	display: block;
+	object-fit: cover;
+}
+
+.swiper-pagination-custom {
+    bottom: 10px;
+    height: 50px;
+    padding: 0px 50px;
+    position: absolute;
+    text-align: center;
+    white-space: nowrap;
+    left: 50%;
+}
+
+.custom_bullet {
+    background-position: center center;
+    background-size: cover;
+    border-radius: 2px;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset;
+    cursor: pointer;
+    display: inline-block;
+    height: 50px;
+    margin: 2px;
+    overflow: hidden;
+    width: 50px;
+    size: 50px;
+}
+
+.swiper-pagination-custom-bullet-active{
+    border: solid 2px rgb(255, 255, 255);
+}
+
+.modal_body::-webkit-scrollbar {
+	width: 8px;
+	border: 1px solid #5865f229;
+    border-radius: 8px;
+} 
+
+.modal_body::-webkit-scrollbar-thumb {
+    background-color: #5865F2;
+	border: 1px solid #5865F2;
+    border-radius: 8px;
+  }
+.modal_body::-webkit-scrollbar-track {
+    background-color: #5865f229;
+}

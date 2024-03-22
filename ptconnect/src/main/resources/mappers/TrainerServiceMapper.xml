@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptconnect.myapp.persistance.TrainerServiceMapper">
+	
+	<!-- 트레이너 찾기 비 로그인 or 로그인-->
+	<select id="findTrainer" parameterType="scri" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
+		, t.tnNo, t.ctNo, t.flNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName, c.flNo AS ctFlNo
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT ROUND(avg(r.rvRate),1) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		<!-- , (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
+		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = c.flNo ORDER BY fd.fdNo ASC LIMIT 1) AS ctImage -->
+		<choose>
+			<when test="mbNo == 0">
+				<choose>
+					<!-- 비 로그인 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+					<when test="mbMapY == 0.0">
+						, (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</when>
+					<!-- 비 로그인 시 && 특정 좌표 클릭 시 해당 좌표 기준으로 반경 검색 -->
+					<otherwise>
+						, (SELECT #{mbMapY}) AS selectMapY
+						, (SELECT #{mbMapX}) AS selectMapX
+						, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="mbMapY == 0.0">
+						, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</when>
+					<otherwise>
+						, (SELECT #{mbMapY}) AS selectMapY
+						, (SELECT #{mbMapX}) AS selectMapX
+						, (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) AS distance
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		<!-- LEFT JOIN review r ON t.tnNo = r.tnNo AND r.rvDelYN = 'N' -->
+		WHERE m.mbDelYN = 'N'
+		<choose>
+			<when test="mbNo == 0">
+				<choose>
+					<when test="mbMapY == 0.0">
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						]]>
+					</when>
+					<!-- 지도에서 주소검색 or 좌표찍을 시 이젠IT 좌표 위치 기준으로 반경 검색 -->
+					<otherwise>
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						]]>
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="mbMapY == 0.0">
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						AND NOT m.mbNo = #{mbNo}
+						]]>		
+					</when>
+					<otherwise>
+						<![CDATA[
+						AND (SELECT ST_DISTANCE_SPHERE(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+						]]>		
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+		<include refid="trainerSearch"/>
+		<choose>
+			<when test="orderBy == null or orderBy.equals('') or orderBy.equals(' ')">
+				ORDER BY distance ASC
+			</when>
+			<when test="orderBy.equals('distance')">
+				ORDER BY #{orderBy} ASC
+			</when>
+			<otherwise>
+				ORDER BY #{orderBy} DESC
+			</otherwise>
+		</choose>
+		LIMIT #{page}, 15
+	</select>
+	
+	<select id="TrainerInfoView_photo_two" parameterType="int" resultType="fdo">
+		SELECT fdNo, flNo, fdName, fdPName, fdDelYN
+		FROM filedetail
+		WHERE flno = #{flno} AND fdDelYN = 'N'
+		ORDER BY fdno ASC
+		LIMIT 2;
+	</select>	
+	
+	<!-- 트레이너 들의 센터 사진 1개 불러옴 -->
+	<select id="center_photo_one" parameterType="int" resultType="fdo">
+		SELECT fdNo, flNo, fdName, fdPName, fdDelYN
+		FROM filedetail
+		WHERE flno = #{flno} AND fdDelYN = 'N'
+		ORDER BY fdno ASC
+		LIMIT 1;
+	</select>	
+	
+	<!-- 로그인 한 유저의 주소 -->
+	<select id="loginUserAddr" parameterType="int" resultType="String">
+		SELECT mbAddr FROM member WHERE mbNo = #{mbNo} AND mbDelYN = 'N';
+	</select>
+	
+	<!-- 트레이너 총 개수 -->
+	<select id="trainerTotalCount" parameterType="scri" resultType="int">
+		SELECT COUNT(t.tnNo) AS trainerCNT
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		<choose>
+			<when test="mbNo == 0 or mbNo == null">
+				<![CDATA[
+				AND (SELECT ST_DISTANCE_SPHERE(POINT(127.1324143491829, 35.84026098258203), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+				]]>				
+			</when>
+			<otherwise>
+				<![CDATA[
+				AND (SELECT ST_Distance_Sphere(POINT(#{mbMapX}, #{mbMapY}), POINT(m.mbMapX, m.mbMapY))) <= #{distance}
+				]]>
+				AND m.mbNo NOT IN(#{mbNo})				
+				
+			</otherwise>
+		</choose>
+		<include refid="trainerSearch"/>
+	</select>
+	
+	<!-- 트레이너 검색 조건 -->
+	<sql id="trainerSearch">
+		<if test="keyword != null and keyword != ''">
+			AND (
+				m.mbName LIKE CONCAT("%",#{keyword},"%")
+				OR m.mbAddr LIKE CONCAT("%",#{keyword},"%")
+				OR c.ctName LIKE CONCAT("%",#{keyword},"%")
+				)
+		</if>
+	</sql>	
+	
+	<!-- 트레이너정보등록 -->
+
+	<insert id="trainerInsert" parameterType="tio" useGeneratedKeys="true" keyProperty="tnNo">
+		<selectKey resultType="int" keyProperty="tnNo"  order="AFTER">
+		select max(tnNo) as tnNo from trainerinfo
+		</selectKey>
+		insert into trainerinfo(mbNo, ctNo, tnOneLine, tnIntro, tnTicket, tnDelYN)
+	 	values(#{mbNo}, #{ctNo}, #{tnOneLine},#{tnIntro},#{tnTicket}, 'C')
+	</insert>
+	<!-- 자격 정보 등록 -->
+	<insert id="qualifyInsert" parameterType="tio">
+		insert into qualify(tnNo, qualify)
+	 	values(#{tnNo}, #{qualify})
+	</insert>
+	
+	<!-- 레슨 가격 정보 등록 -->
+	<insert id="lessonPriceInsert" parameterType="tio">
+		insert into lessonPrice(tnNo, lpCf, lpCount, lessonPrice)
+	 	values(#{tnNo}, #{lpCf}, #{lpCount}, #{lessonPrice})
+	</insert>
+
+	<!-- 프로그램 등록 -->
+	<insert id="programInsert" parameterType="tio">
+		insert into program(tnNo, pgContent)
+	 	values(#{tnNo}, #{pgContent})
+	</insert>
+	
+	<!-- 파일 정보 등록 -->
+<!-- 	<insert id="fileInsert" parameterType="fdo"  useGeneratedKeys="true" keyProperty="flNo"> -->
+<!-- 		<selectKey resultType="int" keyProperty="flNo"  order="AFTER"> -->
+<!-- 		select max(flNo) as flNo from file_ -->
+<!-- 		</selectKey> -->
+<!-- 		insert into file_(flCf, flCfNo) -->
+<!-- 		values( CASE  -->
+<!-- 	                WHEN #{tnNo} IS NOT NULL THEN 'T' -->
+<!-- 	               	WHEN #{ctNo} IS NOT NULL THEN 'C' -->
+<!-- 	                WHEN #{rvNo} IS NOT NULL THEN 'R' -->
+<!-- 	                WHEN #{bdNo} IS NOT NULL THEN 'B' -->
+<!-- 	                ELSE NULL -->
+<!-- 	            END, -->
+<!-- 	            CASE  -->
+<!-- 	                WHEN #{tnNo} IS NOT NULL THEN #{tnNo} -->
+<!-- 	                WHEN #{ctNo} IS NOT NULL THEN #{ctNo} -->
+<!-- 	                WHEN #{rvNo} IS NOT NULL THEN #{rvNo} -->
+<!-- 	                WHEN #{bdNo} IS NOT NULL THEN #{bdNo} -->
+<!-- 	                ELSE NULL -->
+<!-- 	            END)  -->
+<!-- 	</insert> -->
+	
+	<!-- 파일 정보 등록 -->
+	<insert id="fileInsert" parameterType="fdo" useGeneratedKeys="true" keyProperty="flNo">
+    <selectKey resultType="int" keyProperty="flNo" order="AFTER">
+        SELECT MAX(flNo) AS flNo FROM file_
+    </selectKey>
+    INSERT INTO file_ (flCf, flCfNo)
+    VALUES (
+            <if test="tnNo != 0">
+            'T', #{tnNo}
+	        </if>
+	        <if test="ctNo != 0">
+	            'C', #{ctNo}
+	        </if>
+	        <if test="rvNo != 0">
+	            'R', #{rvNo}
+	        </if>
+	        <if test="bdNo != 0">
+	            'B', #{bdNo}
+	        </if>
+    )
+	</insert>
+	
+	<insert id="fileDetailInsert" parameterType="fdo">
+		insert into fileDetail(flNo, fdName, fdPName)
+		values(#{flNo}, #{fdName}, #{fdPName})
+	</insert>
+	
+	<update id="trainerInfoUpdate" parameterType="tio">
+	    UPDATE trainerinfo
+	    SET flNo = #{flNo}
+	    WHERE tnNo = #{tnNo}
+	    ORDER BY tnNo desc limit 1;
+	</update>
+	
+	<!-- 선택한 트레이너 정보 불러옴 -->
+	<select id="TrainerInfoView" parameterType="int" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, m.mbMapY, m.mbMapX
+		, t.tnNo, t.ctNo, t.flno, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT avg(r.rvRate) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewRate
+		, (SELECT q.qualify FROM qualify q WHERE q.tnNo = t.tnNo AND q.qlDelYN = 'N') AS qualify
+		, l.lpCF, l.lpCount, l.lessonPrice
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		JOIN lessonprice l ON t.tnNo = l.tnNo AND l.lpDelYN = 'N'
+		WHERE m.mbDelYN = 'N'
+		AND t.tnNo = #{tnNo};
+	</select>
+	
+	<!-- 선택한 트레이너의 사진들 불러옴 -->
+	<select id="TrainerInfoView_photos" parameterType="int" resultType="fdo">
+		SELECT fdNo, flNo, fdName, fdPName, fdDelYN
+		FROM filedetail
+		WHERE flno = #{flno} AND fdDelYN = 'N'
+		ORDER BY fdNo ASC
+	</select>
+	
+	<!-- 선택한 트레이너의 프로그램들 불러옴 -->
+	<select id="trainerInfoView_Programs" parameterType="int" resultType="tio">
+		SELECT p.* FROM program p
+		JOIN trainerinfo t ON p.tnNo = t.tnNo AND t.tnDelYN = 'N'
+		WHERE p.pgDelYN = 'N' AND p.tnNo = #{tnNo};
+	</select>
+
+	<!-- 선택한 트레이너에 대한 리뷰들 불러옴 -->
+	<select id="TrainerInfoView_reviews" parameterType="int" resultType="rvo">
+		SELECT m.mbName, r.rvNo, r.mbNo, r.tnNo, r.flNo, r.rvContent, r.rvRate, DATE(r.rvDate) AS rvDate, r.rvDateM, r.rvDelYN
+		FROM review r
+		JOIN member m ON r.mbNo = m.mbNo
+		JOIN trainerinfo t ON r.tnno = t.tnno AND r.tnno = #{tnNo}
+		WHERE m.mbDelYn = 'N' AND r.rvDelYN = 'N'
+		ORDER BY rvNo desc
+	</select>
+	
+	<!-- 선택한 트레이너에 대한 리뷰들 각각의 사진파일 불러옴 -->
+	<select id="TrainerInfoView_reviews_files" parameterType="int" resultType="fdo">
+		SELECT * FROM filedetail WHERE flno = #{flNo} AND fdDelYN = 'N';
+	</select>
+	
+	<update id="trainerModify" parameterType="tio">
+		update trainerinfo set tnOneLine = #{tnOneLine}, tnIntro = #{tnIntro},
+		tnTicket = #{tnTicket}, tnDateM = now()
+		where tnNo = #{tnNo} and mbNo = #{mbNo} and tnDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
+	</update>
+	
+	<update id="qualifyModify" parameterType="tio">
+		update qualify set qualify = #{qualify}, qlDateM = now()
+		where tnNo = #{tnNo} and qlDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
+	</update>
+	
+	<update id="lessonPriceModify" parameterType="tio">
+		update lessonPrice set lpCf = #{lpCf}, lpCount = #{lpCount},
+		lessonPrice = #{lessonPrice}, lpDateM = now()
+		where tnNo = #{tnNo} and lpDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
+	</update>
+	
+	<update id="programModify" parameterType="tio">
+		update program set pgContent = #{pgContent}, pgDateM = now()
+		where tnNo = #{tnNo} and pgDelYN = 'N'
+		ORDER BY tnNo desc limit 1;
+	</update>
+	
+	<update id="file_Modify" parameterType="fdo">
+		update file_ set flDateM = now()
+		where 
+		<if test="tnNo != ''">
+		flCf = 'T' and flCfNo = #{tnNo}
+		</if>
+		<if test="ctNo != ''">
+		flCf = 'C' and flCfNo = #{ctNo}
+		</if>
+		<if test="rvNo != ''">
+		flCf = 'R' and flCfNo = #{rvNo}
+		</if>
+		<if test="bdNo != ''">
+		flCf = 'B' and flCfNo = #{bdNo}
+		</if>
+		and flDelYN = 'N'
+		ORDER BY flNo desc limit 1;
+<!-- 		flCf = 'T' and flCfNo = #{tnNo} -->
+		<selectKey keyProperty="flNo" resultType="int" order="AFTER">
+        SELECT flNo
+        FROM file_
+        WHERE
+        <if test="tnNo != ''">
+		flCf = 'T' and flCfNo = #{tnNo}
+		</if>
+		<if test="ctNo != ''">
+		flCf = 'C' and flCfNo = #{ctNo}
+		</if>
+		<if test="rvNo != ''">
+		flCf = 'R' and flCfNo = #{rvNo}
+		</if>
+		<if test="bdNo != ''">
+		flCf = 'B' and flCfNo = #{bdNo}
+		</if>
+		and flDelYN = 'N'
+		ORDER BY flNo desc limit 1;
+		</selectKey>
+	</update>
+	
+	<update id="fileDetailModify" parameterType="fdo">
+		update fileDetail set fdDelYN = 'Y' 
+		where flNo = #{flNo} and fdDelYN = 'N'
+	</update>
+	
+	<select id="memberSelectOne" parameterType="int" resultType="mo">
+		SELECT *
+		FROM member
+		WHERE mbNo = #{mbNo}
+		ORDER BY mbNo desc limit 1;
+	</select>
+	
+	<select id="trainerSelectOne" parameterType="int" resultType="tio">
+		SELECT *
+		FROM trainerinfo
+		WHERE mbNo = #{mbNo} AND tnDelYN != 'Y' ORDER BY tnNo desc limit 1
+	</select>
+	
+	<select id="qualifySelectOne" parameterType="int" resultType="qo">
+		SELECT qualify
+		FROM qualify
+		WHERE tnNo = #{tnNo}
+		ORDER BY tnNo desc limit 1;
+	</select>
+	
+	<select id="lessonPriceSelectOne" parameterType="int" resultType="pro">
+		SELECT *
+		FROM lessonprice
+		WHERE tnNo = #{tnNo}
+		ORDER BY tnNo desc limit 1;
+	</select>
+	
+	<select id="programSelectOne" parameterType="int" resultType="pgo">
+		SELECT pgContent
+		FROM program
+		WHERE tnNo = #{tnNo}
+		ORDER BY tnNo desc limit 1;
+	</select>
+	
+	<select id="trainerSelectAll" resultType="tio">
+		SELECT m.mbNo, m.mbAuth, m.mbEmail, m.mbName, t.tnNo, t.ctNo, t.tnOneLine, t.tnIntro, t.tnTicket, c.ctName
+		, (SELECT mtc.mbAddr FROM member mtc WHERE mtc.mbNo = c.mbNo) AS mbAddr
+		, (SELECT COUNT(r.rvNo) FROM review r WHERE r.tnNo = t.tnNo AND r.rvDelYN = 'N') AS reviewCnt
+		, (SELECT fd.fdName FROM filedetail fd WHERE fd.flNo = t.flNo and fd.fdDelYn = 'N' ORDER BY fd.fdNo ASC LIMIT 1) AS tnImage
+		FROM member m
+		JOIN trainerinfo t ON m.mbNo = t.mbNo AND t.tnDelYN = 'N'
+		JOIN centerinfo c ON t.ctNo = c.ctNo AND c.ctDelYN = 'N'
+		WHERE m.mbDelYN = 'N' AND m.mbAuth ='T'
+		ORDER BY m.mbNo desc limit 10
+	</select>
+	
+	<select id="countMember" resultType="int">
+		SELECT COUNT(*) FROM member where mbAuth='U' AND mbDelYN='N'
+	</select>
+	
+	<select id="countTrainer" resultType="int">
+		SELECT COUNT(*) FROM member where mbAuth='T' AND mbDelYN='N'
+	</select>
+	
+	<select id="countOrder" resultType="int">
+		SELECT COUNT(*) FROM order_
+	</select>
+	
+	<update id="trainerCenterConnect" parameterType="map">
+		UPDATE trainerinfo set ctNo=#{ctNo}, tnDelYN="C", tnDateM = now()
+		WHERE tnNo=#{tnNo}
+		ORDER BY tnNo desc limit 1
+	</update>
+	
+	<insert id="reviewInsert" parameterType="rvo" useGeneratedKeys="true" keyProperty="rvNo">
+		<selectKey resultType="int" keyProperty="rvNo"  order="AFTER">
+		select max(rvNo) as rvNo from review
+		</selectKey>
+		INSERT INTO review(mbNo, tnNo, rvContent, rvRate)
+		values(#{mbNo}, #{tnNo}, #{rvContent}, #{rvRate})
+	</insert>
+	
+	<update id="reviewUpdate" parameterType="fdo">
+		UPDATE review
+	    SET flNo = #{flNo}
+	    WHERE rvNo = #{rvNo}
+	    ORDER BY tnNo desc limit 1;
+	</update>
+	
+	<select id="checkOrder" parameterType="tio" resultType="int">
+		select count(o.odNo)
+		from order_ o
+		join member m on m.mbNo = o.mbNo
+		join orderproduct op on op.odNo = o.odNo
+		where m.mbNo = #{mbNo} and op.tnNo = #{tnNo}
+	</select>
+	
+</mapper>

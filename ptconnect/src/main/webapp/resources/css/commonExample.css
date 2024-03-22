@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+.example_contents{
+    margin-top: 48px;
+    height: 100%;
+    border-radius: 8px;
+    background-color: rgb(247, 249, 250);
+    border: 1px solid rgb(228, 234, 240);
+}
+
+.example_contents .example_wrap{
+    display: flex;
+}
+
+.example_contents .example_wrap .chat_list{
+    width: 368px;
+    border-right: 1px solid rgb(228, 234, 240);
+}
+
+.example_wrap .chat_list .header{
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 6px;
+    padding: 16px;
+    border-bottom: 1px solid rgb(228, 234, 240);
+}
+
+.example_wrap .chat_list .read_all{
+    font-size: 14px;
+    color: rgb(108, 118, 128);
+    text-align: right;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.example_wrap .chat_list .chat_comp{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(228, 234, 240);
+    padding: 16px;
+    cursor: pointer;
+    background-color: rgb(247, 249, 250);
+}
+
+.example_wrap .chat_list .chat_comp.open{
+    background-color: rgb(255, 255, 255);
+}
+
+.example_wrap .chat_list .chat_icon{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 18px;
+}
+
+.example_wrap .chat_list .chat_box{
+	width: 100%;
+}
+
+.example_wrap .chat_list .chat_title{
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    margin: 0px;
+}
+
+.example_wrap .chat_list .other_user{
+    font-size: 14px;
+    color: rgb(108, 118, 128);
+}
+
+.example_wrap .chat_list .chat_time{
+    font-size: 14px;
+    color: rgb(108, 118, 128);
+    float:right;
+}
+
+.example_contents .example_wrap .chat_contents{
+    display: block;
+    width: 100%;
+    max-width: calc(100% - 368px);
+    height: auto;
+    min-height: 60vh;
+    font-size: 16px;
+    color: rgb(61, 69, 77);
+    word-break: break-word;
+}
+
+.example_wrap .chat_contents .chat_contents_title{
+    background-color: rgb(255,255,255);
+    padding : 15px 0;
+    border-bottom: 1px solid rgb(228, 234, 240);
+}
+
+.example_wrap .chat_contents .chat_title{
+    font-size: 18px;
+    color: rgb(61, 69, 77);
+    margin: auto 0px;
+    padding : 0 24px;
+}
+
+.example_wrap .chat_contents .not_empty{
+    background-color: rgb(255, 255, 255);
+    height: 95%;
+    padding: 10px 10px;
+}
+
+.example_wrap .chat_contents .chat_area{
+	margin : 15px 15px 10px 15px;
+	border-radius : 10px;
+	height: calc(100% - 80px);
+}
+
+.other_msg{
+	margin-top : 15px;
+	
+}
+
+.chat_area .other_msg .user_icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin:auto 10px;
+    object-fit: cover;
+}
+
+.chat_area .other_msg .msg_txt{
+	padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    margin:0px 5px;
+}

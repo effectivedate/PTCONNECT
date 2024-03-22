@@ -1,0 +1,265 @@
+@charset "UTF-8";
+
+input::placeholder {
+	font-weight: bold;
+	color: #94959b;
+}
+
+input:focus {
+    outline: none;
+}
+
+.homeMainBanner{
+	height:100%;
+	width:100%;
+	background-color:#dceffe;
+}
+
+.bannerBox{
+	display:flex;
+	justify-content:center;
+}
+.banner {
+	 display: grid;
+	text-align:center;
+	justify-content:center;
+	padding:50px 100px;
+	
+}
+.banner img{
+	width:200px;
+	height:250px;
+	}
+
+.banner h1{
+	color:#e68b1e;
+}
+
+.banner span{
+	color:#ff8080;
+}
+
+.swiper {
+    height: 600px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: rgb(247, 249, 250);
+    overflow: hidden; /* 이 부분을 추가 */
+
+    /* 아래 속성 추가 */
+    position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.reviewBannerTitle{
+	display:grid;
+}
+
+.titleBar{
+	margin:50px auto;
+	color: rgb(61, 69, 77);
+}
+
+.titleBar span {
+	color: #5865f2;
+}
+
+.swiper-wrapper{
+	position:absolute;
+	display:flex;
+	gap:30px;
+	margin:0 auto;
+}
+
+.swiper-slide{
+	display:grid;
+	background-color:white;
+	border:none;
+	border-radius:10px;
+	width:450px;
+	height:220px;
+	box-shadow: 0 4px 8px rgb(166 107 107 / 50%);
+	padding: 15px;
+}
+
+
+
+.mainReviewTitle{
+	display:flex;
+	align-items:center;
+	justify-content: space-between;
+	padding:10px;
+	color: #5865f2;
+	border-bottom: 1px solid #0000001f;
+}
+
+.mainReviewTitle span{
+	color: rgb(108 118 128 / 68%);
+    font-weight: bold;
+}
+
+.reviewDate{
+	padding-right: 180px;
+	color: #c0c0c0;
+}
+
+
+  .reviewText {
+	  margin:0 auto;
+	   width:90%;
+		height: 110px; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* Number of lines to show before adding ellipsis */
+        -webkit-box-orient: vertical;
+        font-size: 15px;
+		color: #495057;
+    }
+
+.moveTrainerPage{
+	width:100%;
+	height:80px;
+	display:flex;
+	background-color:white;
+	border-radius: 50px;
+	white-space: nowrap;
+	border: 1px solid rgb(237, 241, 245);
+    box-shadow: rgba(218, 224, 230, 0.38) 2px 4px 8px;
+	margin-top: 35px;
+}
+
+.moveTrainerPage img{
+	width:80px;
+	height:80px;
+	border-radius:50%;
+	border: 1px solid rgb(237, 241, 245);
+  	box-shadow: rgba(108, 118, 128, 0.16) 1px 2px 4px, rgba(108, 118, 128, 0.16) 1px 4px 8px;
+}
+
+
+.trainerProfile{
+	display:flex;
+	width:100%;
+	justify-content: space-between;
+	align-items:center;
+}
+
+.profileTitle{
+	display:grid;
+	align-items:center;
+	padding:10px;
+}
+
+.profileTitle span{
+	color:#8080ff;
+}
+
+.profileAddr{
+	color:#b3b3b3;
+}
+
+.movePageBtn button{
+	border:none;
+	background-color:transparent;
+	cursor: pointer;
+}
+
+.btnSymbol{
+	color: #8080ff; /* 원하는 색상 코드 */
+	font-size: 50px;
+	font-weight: bolder;
+}
+
+.titleBar{
+	display:flex;
+	align-items:center;
+}
+
+
+.titleBar h1{
+	font-size:30px;
+}
+
+
+.titleBar img{
+	width: 32px;
+    height: 29px;
+	margin-left: 10px;
+}
+
+.mainSearchBar {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    z-index: 100;
+    height: 76px;
+    margin-top: 64px;
+    border-radius: 40px;
+    box-shadow: rgba(218, 224, 230, 0.38) 0px 4px 8px;
+	border: 1px solid #5865f22e;
+	max-width: 1136px;
+	margin: 50px auto;
+    font-size: 16px;
+}
+
+.searchKeyword {
+    padding: 10px;
+    width: calc(60% + 205px);
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+.searchKeyword input {
+	font-size: 18px !important;
+	font-weight: bold;
+	font-color: #3d454d;
+}
+
+.searchKeyword input {
+    width: 100%;
+    border: none !important;
+    font-size: 18px;
+    padding-left: 48px;
+    background-color: transparent;
+}
+
+.searchButton {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    right: -12px;
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: bold;
+    border: none;
+    height: 60px;
+    min-width: 200px;
+    background-color: #5865f22e;
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: #5865f2;
+    cursor: pointer;
+}
+
+.searchButton img {
+    height: 36px;
+    width: 36px;
+    margin-right: 12px;
+}
+
+
+
+
+
+
+
+
